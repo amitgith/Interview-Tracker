@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteInterview } from "../features/tracker/trackerSlice";
 
-const InterviewCard = ({ interview }) => {
+const InterviewCard = ({ interview, onEdit }) => {
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(deleteInterview(interview.id));
@@ -23,7 +23,7 @@ const InterviewCard = ({ interview }) => {
       <div className="mt-4 flex items-center justify-between">
         <p className="text-sm text-gray-500">📅 {interview.date}</p>
 
-        <div className="flex gap-2">
+        <div onClick={onEdit} className="flex gap-2">
           <button className="rounded-lg border px-3 py-1 cursor-pointer">
             Edit
           </button>
