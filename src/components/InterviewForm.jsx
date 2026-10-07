@@ -9,7 +9,13 @@ const InterviewForm = ({ onClose }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange" });
+  } = useForm({
+    defaultValues: {
+      category: "DSA",
+      difficulty: "Easy",
+      status: "Pending",
+    },
+  });
 
   const onSubmit = (data) => {
     dispatch(
@@ -28,64 +34,49 @@ const InterviewForm = ({ onClose }) => {
       className="mt-4 rounded-xl bg-white p-5 shadow-sm"
     >
       <div className="grid gap-4">
-        {/* Company */}
+        {/* Question */}
         <div>
           <input
-            {...register("company", {
-              required: "Company name is required",
+            {...register("question", {
+              required: "Question is required",
             })}
-            placeholder="Company Name"
-            className="w-full rounded-lg border px-4 py-2"
+            placeholder="Enter interview question"
+            className="w-full rounded-lg border px-4 py-2 outline-none"
           />
 
-          {errors.company && (
+          {errors.question && (
             <p className="mt-1 text-sm text-red-500">
-              {errors.company.message}
+              {errors.question.message}
             </p>
           )}
         </div>
 
-        {/* Role */}
-        <div>
-          <input
-            {...register("role", {
-              required: "Job role is required",
-            })}
-            placeholder="Job Role"
-            className="w-full rounded-lg border px-4 py-2"
-          />
-
-          {errors.role && (
-            <p className="mt-1 text-sm text-red-500">{errors.role.message}</p>
-          )}
-        </div>
-
-        {/* Status */}
+        {/* Category */}
         <select
-          {...register("status")}
+          {...register("category")}
           className="rounded-lg border px-4 py-2"
-          defaultValue="Applied"
         >
-          <option value="Applied">Applied</option>
-          <option value="Interview">Interview</option>
-          <option value="Selected">Selected</option>
-          <option value="Rejected">Rejected</option>
+          <option value="DSA">DSA</option>
+          <option value="Git">Git</option>
+          <option value="Technical">Technical</option>
         </select>
 
-        {/* Date */}
-        <div>
-          <input
-            type="date"
-            {...register("date", {
-              required: "Interview date is required",
-            })}
-            className="rounded-lg border px-4 py-2"
-          />
+        {/* Difficulty */}
+        <select
+          {...register("difficulty")}
+          className="rounded-lg border px-4 py-2"
+        >
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
 
-          {errors.date && (
-            <p className="mt-1 text-sm text-red-500">{errors.date.message}</p>
-          )}
-        </div>
+        {/* Status */}
+        <select {...register("status")} className="rounded-lg border px-4 py-2">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
 
         {/* Buttons */}
         <div className="flex gap-3">
@@ -93,7 +84,7 @@ const InterviewForm = ({ onClose }) => {
             type="submit"
             className="rounded-lg bg-black px-4 py-2 text-white"
           >
-            Add Interview
+            Add Question
           </button>
 
           <button

@@ -11,10 +11,10 @@ const EditInterviewForm = ({ interview, onClose }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      company: interview.company,
-      role: interview.role,
+      question: interview.question,
+      category: interview.category,
+      difficulty: interview.difficulty,
       status: interview.status,
-      date: interview.date,
     },
   });
 
@@ -35,57 +35,56 @@ const EditInterviewForm = ({ interview, onClose }) => {
       className="mt-4 rounded-xl bg-white p-5 shadow-sm"
     >
       <div className="grid gap-4">
+        {/* Question */}
         <div>
           <input
-            {...register("company", {
-              required: "Company name is required",
+            {...register("question", {
+              required: "Question is required",
             })}
-            className="w-full rounded-lg border px-4 py-2"
+            className="w-full rounded-lg border px-4 py-2 outline-none"
           />
 
-          {errors.company && (
-            <p className="text-sm text-red-500">{errors.company.message}</p>
+          {errors.question && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.question.message}
+            </p>
           )}
         </div>
 
-        <div>
-          <input
-            {...register("role", {
-              required: "Job role is required",
-            })}
-            className="w-full rounded-lg border px-4 py-2"
-          />
-
-          {errors.role && (
-            <p className="text-sm text-red-500">{errors.role.message}</p>
-          )}
-        </div>
-
-        <select {...register("status")} className="rounded-lg border px-4 py-2">
-          <option value="Applied">Applied</option>
-          <option value="Interview">Interview</option>
-          <option value="Selected">Selected</option>
-          <option value="Rejected">Rejected</option>
+        {/* Category */}
+        <select
+          {...register("category")}
+          className="rounded-lg border px-4 py-2"
+        >
+          <option value="DSA">DSA</option>
+          <option value="Git">Git</option>
+          <option value="Technical">Technical</option>
         </select>
 
-        <input
-          type="date"
-          {...register("date", {
-            required: "Date is required",
-          })}
+        {/* Difficulty */}
+        <select
+          {...register("difficulty")}
           className="rounded-lg border px-4 py-2"
-        />
+        >
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
 
-        {errors.date && (
-          <p className="text-sm text-red-500">{errors.date.message}</p>
-        )}
+        {/* Status */}
+        <select {...register("status")} className="rounded-lg border px-4 py-2">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
 
+        {/* Buttons */}
         <div className="flex gap-3">
           <button
             type="submit"
             className="rounded-lg bg-black px-4 py-2 text-white"
           >
-            Update Interview
+            Update Question
           </button>
 
           <button

@@ -1,21 +1,62 @@
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSearch,
+  setCategoryFilter,
+  setStatusFilter,
+  setDifficultyFilter,
+} from "../features/tracker/trackerSlice";
+
 const FilterBar = () => {
+  const dispatch = useDispatch();
+
+  const filters = useSelector((state) => state.tracker.filters);
+
   return (
-    <div className="flex gap-4 rounded-xl bg-white p-4 shadow-sm">
-      
+    <div className="grid gap-4 rounded-xl bg-white p-4 shadow-sm md:grid-cols-4">
+      {/* Search */}
       <input
         type="text"
-        placeholder="Search interviews..."
-        className="flex-1 rounded-lg border px-4 py-2 outline-none"
+        placeholder="Search questions..."
+        value={filters.search}
+        onChange={(e) => dispatch(setSearch(e.target.value))}
+        className="rounded-lg border px-4 py-2 outline-none"
       />
 
-      <select className="rounded-lg border px-4 py-2">
-        <option value="all">All</option>
-        <option value="Applied">Applied</option>
-        <option value="Interview">Interview</option>
-        <option value="Selected">Selected</option>
-        <option value="Rejected">Rejected</option>
+      {/* Category */}
+      <select
+        value={filters.category}
+        onChange={(e) => dispatch(setCategoryFilter(e.target.value))}
+        className="rounded-lg border px-4 py-2"
+      >
+        <option value="all">All Categories</option>
+        <option value="DSA">DSA</option>
+        <option value="Git">Git</option>
+        <option value="Technical">Technical</option>
       </select>
 
+      {/* Status */}
+      <select
+        value={filters.status}
+        onChange={(e) => dispatch(setStatusFilter(e.target.value))}
+        className="rounded-lg border px-4 py-2"
+      >
+        <option value="all">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+      {/* Difficulty */}
+      <select
+        value={filters.difficulty}
+        onChange={(e) => dispatch(setDifficultyFilter(e.target.value))}
+        className="rounded-lg border px-4 py-2"
+      >
+        <option value="all">All Difficulties</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
     </div>
   );
 };

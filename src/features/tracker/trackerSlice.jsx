@@ -6,20 +6,31 @@ const trackerSlice = createSlice({
     interviews: [
       {
         id: 1,
-        company: "Google",
-        role: "Frontend Developer",
-        status: "Applied",
+        question: "Two Sum",
+        category: "DSA",
+        difficulty: "Easy",
+        status: "Completed",
       },
       {
         id: 2,
-        company: "Microsoft",
-        role: "React Developer",
-        status: "Interview",
+        question: "Git Merge vs Rebase",
+        category: "Git",
+        difficulty: "Medium",
+        status: "In Progress",
+      },
+      {
+        id: 3,
+        question: "What is React Virtual DOM?",
+        category: "Technical",
+        difficulty: "Easy",
+        status: "Pending",
       },
     ],
     filters: {
-      status: "all",
       search: "",
+      category: "all",
+      status: "all",
+      difficulty: "all",
     },
   },
   reducers: {
@@ -39,11 +50,20 @@ const trackerSlice = createSlice({
         state.interviews[index] = action.payload;
       }
     },
+    setSearch: (state, action) => {
+      state.filters.search = action.payload;
+    },
+
+    setCategoryFilter: (state, action) => {
+      state.filters.category = action.payload;
+    },
+
     setStatusFilter: (state, action) => {
       state.filters.status = action.payload;
     },
-    setSearch: (state, action) => {
-      state.filters.search = action.payload;
+
+    setDifficultyFilter: (state, action) => {
+      state.filters.difficulty = action.payload;
     },
   },
 });
@@ -51,8 +71,10 @@ export const {
   addInterview,
   deleteInterview,
   updateInterview,
-  setStatusFilter,
   setSearch,
+  setCategoryFilter,
+  setStatusFilter,
+  setDifficultyFilter,
 } = trackerSlice.actions;
 
 export default trackerSlice.reducer;
