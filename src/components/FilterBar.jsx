@@ -12,21 +12,19 @@ const FilterBar = () => {
   const filters = useSelector((state) => state.tracker.filters);
 
   return (
-    <div className="grid gap-4 rounded-xl bg-white p-4 shadow-sm md:grid-cols-4">
-      {/* Search */}
+    <div className="grid gap-3 rounded-xl bg-white p-4 shadow-sm sm:gap-4 md:grid-cols-4">
       <input
         type="text"
         placeholder="Search questions..."
         value={filters.search}
         onChange={(e) => dispatch(setSearch(e.target.value))}
-        className="rounded-lg border px-4 py-2 outline-none"
+        className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition focus:border-black"
       />
 
-      {/* Category */}
       <select
         value={filters.category}
         onChange={(e) => dispatch(setCategoryFilter(e.target.value))}
-        className="rounded-lg border px-4 py-2"
+        className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
       >
         <option value="all">All Categories</option>
         <option value="DSA">DSA</option>
@@ -34,11 +32,10 @@ const FilterBar = () => {
         <option value="Technical">Technical</option>
       </select>
 
-      {/* Status */}
       <select
         value={filters.status}
         onChange={(e) => dispatch(setStatusFilter(e.target.value))}
-        className="rounded-lg border px-4 py-2"
+        className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
       >
         <option value="all">All Status</option>
         <option value="Pending">Pending</option>
@@ -46,11 +43,10 @@ const FilterBar = () => {
         <option value="Completed">Completed</option>
       </select>
 
-      {/* Difficulty */}
       <select
         value={filters.difficulty}
         onChange={(e) => dispatch(setDifficultyFilter(e.target.value))}
-        className="rounded-lg border px-4 py-2"
+        className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
       >
         <option value="all">All Difficulties</option>
         <option value="Easy">Easy</option>

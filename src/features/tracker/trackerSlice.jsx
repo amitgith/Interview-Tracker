@@ -1,38 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
+const storedInterviews = localStorage.getItem("interviews");
+const storedMachineCoding = localStorage.getItem("machineCoding");
+const initialState = {
+  interviews: storedInterviews ? JSON.parse(storedInterviews) : [],
+
+  machineCoding: storedMachineCoding
+    ? JSON.parse(storedMachineCoding)
+    : {
+        status: "Pending",
+      },
+
+  filters: {
+    search: "",
+    category: "all",
+    status: "all",
+    difficulty: "all",
+  },
+};
 
 const trackerSlice = createSlice({
   name: "tracker",
-  initialState: {
-    interviews: [
-      {
-        id: 1,
-        question: "Two Sum",
-        category: "DSA",
-        difficulty: "Easy",
-        status: "Completed",
-      },
-      {
-        id: 2,
-        question: "Git Merge vs Rebase",
-        category: "Git",
-        difficulty: "Medium",
-        status: "In Progress",
-      },
-      {
-        id: 3,
-        question: "What is React Virtual DOM?",
-        category: "Technical",
-        difficulty: "Easy",
-        status: "Pending",
-      },
-    ],
-    filters: {
-      search: "",
-      category: "all",
-      status: "all",
-      difficulty: "all",
-    },
-  },
+  initialState,
   reducers: {
     addInterview: (state, action) => {
       state.interviews.push(action.payload);
@@ -65,6 +53,9 @@ const trackerSlice = createSlice({
     setDifficultyFilter: (state, action) => {
       state.filters.difficulty = action.payload;
     },
+    setMachineCodingStatus: (state, action) => {
+      state.machineCoding.status = action.payload;
+    },
   },
 });
 export const {
@@ -75,6 +66,7 @@ export const {
   setCategoryFilter,
   setStatusFilter,
   setDifficultyFilter,
+  setMachineCodingStatus,
 } = trackerSlice.actions;
 
 export default trackerSlice.reducer;
