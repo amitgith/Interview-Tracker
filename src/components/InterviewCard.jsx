@@ -15,16 +15,13 @@ const InterviewCard = ({ interview, onEdit }) => {
           <h2 className="wrap-break-word text-base font-semibold sm:text-lg">
             {interview.question}
           </h2>
-
           <div className="mt-3 flex flex-wrap gap-2">
             <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium sm:text-sm">
               {interview.category}
             </span>
-
             <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium sm:text-sm">
               {interview.difficulty}
             </span>
-
             <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium sm:text-sm">
               {interview.status}
             </span>
