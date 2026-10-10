@@ -3,13 +3,11 @@ const storedInterviews = localStorage.getItem("interviews");
 const storedMachineCoding = localStorage.getItem("machineCoding");
 const initialState = {
   interviews: storedInterviews ? JSON.parse(storedInterviews) : [],
-
   machineCoding: storedMachineCoding
     ? JSON.parse(storedMachineCoding)
     : {
         status: "Pending",
       },
-
   filters: {
     search: "",
     category: "all",
@@ -17,7 +15,6 @@ const initialState = {
     difficulty: "all",
   },
 };
-
 const trackerSlice = createSlice({
   name: "tracker",
   initialState,
