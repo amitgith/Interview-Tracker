@@ -116,7 +116,7 @@ const EditInterviewForm = ({ interview, onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg cursor-pointer border px-4 py-2.5 cursor-pointer text-sm font-medium transition hover:bg-gray-100"
+            className="rounded-lg border px-4 py-2.5 cursor-pointer text-sm font-medium transition hover:bg-gray-100"
           >
             Cancel
           </button>
