@@ -20,6 +20,12 @@ const Dashboard = () => {
       item.status === "Completed"
   ).length;
 
+  const completedGit = interviews.filter(
+    (item) =>
+      item.category === "Git" &&
+      item.status === "Completed"
+  ).length;
+
   const completedInterviewQuestions = interviews.filter(
     (item) =>
       item.category === "Technical" &&
@@ -39,40 +45,33 @@ const Dashboard = () => {
 
   return (
     <section>
-      {/* Dashboard Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         <div className="rounded-xl bg-white p-5 shadow-sm">
-          <p className="text-sm text-gray-500">
-            Total Questions
-          </p>
-          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
-            {totalQuestions}
-          </h2>
+          <p className="text-sm text-gray-500">Total Questions</p>
+          <h2 className="mt-2 text-2xl font-bold">{totalQuestions}</h2>
         </div>
 
         <div className="rounded-xl bg-white p-5 shadow-sm">
-          <p className="text-sm text-gray-500">
-            Completed DSA
-          </p>
-          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
-            {completedDSA}
-          </h2>
+          <p className="text-sm text-gray-500">Completed DSA</p>
+          <h2 className="mt-2 text-2xl font-bold">{completedDSA}</h2>
+        </div>
+
+        <div className="rounded-xl bg-white p-5 shadow-sm">
+          <p className="text-sm text-gray-500">Completed Git Questions</p>
+          <h2 className="mt-2 text-2xl font-bold">{completedGit}</h2>
         </div>
 
         <div className="rounded-xl bg-white p-5 shadow-sm">
           <p className="text-sm text-gray-500">
             Completed Interview Questions
           </p>
-          <h2 className="mt-2 text-2xl font-bold sm:text-3xl">
+          <h2 className="mt-2 text-2xl font-bold">
             {completedInterviewQuestions}
           </h2>
         </div>
 
         <div className="rounded-xl bg-white p-5 shadow-sm">
-          <p className="text-sm text-gray-500">
-            Machine Coding
-          </p>
-
+          <p className="text-sm text-gray-500">Machine Coding</p>
           <select
             value={machineCodingStatus}
             onChange={(e) =>
@@ -87,21 +86,16 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Overall Progress */}
       <div className="mt-5 rounded-xl bg-white p-5 shadow-sm sm:mt-6">
         <div className="mb-3 flex items-center justify-between gap-4">
           <div>
-            <p className="font-semibold">
-              Overall Progress
-            </p>
+            <p className="font-semibold">Overall Progress</p>
             <p className="mt-1 text-sm text-gray-500">
               {completedQuestions} of {totalQuestions} questions completed
             </p>
           </div>
 
-          <span className="text-lg font-bold">
-            {progress}%
-          </span>
+          <span className="text-lg font-bold">{progress}%</span>
         </div>
 
         <div

@@ -8,6 +8,7 @@ const InterviewForm = ({ onClose }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -21,29 +22,27 @@ const InterviewForm = ({ onClose }) => {
   const onSubmit = (data) => {
     dispatch(
       addInterview({
-        id: Date.now(),
-        ...data,
+        id: crypto.randomUUID(),
+        question: data.question.trim(),
+        category: data.category,
+        difficulty: data.difficulty,
+        status: data.status,
       }),
     );
 
+    reset();
     onClose();
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-4 rounded-xl bg-white p-4 shadow-sm sm:p-5"
+      className="rounded-xl bg-white p-5 shadow-sm"
     >
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold">Add New Question</h2>
+      <h2 className="mb-4 text-lg font-semibold">Add Question</h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          Add a question to your interview preparation tracker.
-        </p>
-      </div>
-
-      <div className="grid gap-4">
-        <div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="sm:col-span-2">
           <label className="mb-1 block text-sm font-medium">Question</label>
 
           <input
@@ -51,11 +50,11 @@ const InterviewForm = ({ onClose }) => {
               required: "Question is required",
               minLength: {
                 value: 3,
-                message: "Question must be at least 3 characters",
+                message: "Question must contain at least 3 characters",
               },
             })}
-            placeholder="Enter interview question"
-            className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none transition focus:border-black"
+            placeholder="Enter your question"
+            className="w-full rounded-lg border px-3 py-2 outline-none focus:ring-2 focus:ring-gray-300"
           />
 
           {errors.question && (
@@ -65,63 +64,61 @@ const InterviewForm = ({ onClose }) => {
           )}
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div>
-            <label className="mb-1 block text-sm font-medium">Category</label>
+        <div>
+          <label className="mb-1 block text-sm font-medium">Category</label>
 
-            <select
-              {...register("category")}
-              className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
-            >
-              <option value="DSA">DSA</option>
-              <option value="Git">Git</option>
-              <option value="Technical">Technical</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm font-medium">Difficulty</label>
-
-            <select
-              {...register("difficulty")}
-              className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
-            >
-              <option value="Easy">Easy</option>
-              <option value="Medium">Medium</option>
-              <option value="Hard">Hard</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-1 block text-sm font-medium">Status</label>
-
-            <select
-              {...register("status")}
-              className="w-full rounded-lg border px-4 py-2.5 text-sm outline-none"
-            >
-              <option value="Pending">Pending</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </div>
+          <select
+            {...register("category", { required: true })}
+            className="w-full rounded-lg border px-3 py-2"
+          >
+            <option value="DSA">DSA</option>
+            <option value="Git">Git</option>
+            <option value="Technical">Technical</option>
+          </select>
         </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <button
-            type="submit"
-            className="rounded-lg bg-black px-4 py-2.5 cursor-pointer text-sm font-medium text-white transition hover:bg-gray-800"
-          >
-            Add Question
-          </button>
+        <div>
+          <label className="mb-1 block text-sm font-medium">Difficulty</label>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-lg border px-4 py-2.5 text-sm cursor-pointer font-medium transition hover:bg-gray-100"
+          <select
+            {...register("difficulty", { required: true })}
+            className="w-full rounded-lg border px-3 py-2"
           >
-            Cancel
-          </button>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
         </div>
+
+        <div className="sm:col-span-2">
+          <label className="mb-1 block text-sm font-medium">Status</label>
+
+          <select
+            {...register("status", { required: true })}
+            className="w-full rounded-lg border px-3 py-2"
+          >
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="mt-5 flex flex-wrap justify-end gap-3">
+        <button
+          type="button"
+          onClick={onClose}
+          className="rounded-lg border px-4 py-2"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          className="rounded-lg bg-black px-4 py-2 text-white"
+        >
+          Add Question
+        </button>
       </div>
     </form>
   );
